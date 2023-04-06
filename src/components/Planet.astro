@@ -1,0 +1,56 @@
+---
+export interface Props {
+    src: string;
+}
+
+const { src } = Astro.props;
+---
+
+<div class="rotate">
+    <div class="planet" style={`background: url('${src}') center/200%`}></div>
+</div>
+<style>
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .planet {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+        animation: move 50s linear infinite;
+        box-shadow: 0 0 25px RGBA(255, 255, 255, 0.1), -8px -8px 15px #000 inset,
+            2px 2px 25px #000 inset, -45px -45px 25px RGBA(0, 0, 0, 0.5) inset,
+            25px 25px 45px RGBA(0, 0, 0, 0.45) inset;
+        transform: rotateX(6deg) rotateY(6deg) rotateZ(0deg);
+        transition: all 0.2s linear;
+    }
+
+    .planet:hover {
+        transform: scale(1.02);
+    }
+
+    .rotate {
+        animation: spin 50s linear infinite;
+    }
+
+    @keyframes move {
+        from {
+            background-position: 200% 0;
+        }
+        to {
+            background-position: -200% 0;
+        }
+    }
+    @keyframes spin {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
